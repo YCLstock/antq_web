@@ -99,10 +99,9 @@
       </div>
 		</div>
 	</div>
-
-	  <!-- Footer -->
-	  <Ft></Ft>
-	</div>
+</div>
+  <!-- Footer -->
+  <Ft></Ft>
 </template>
 
 <script setup>	  

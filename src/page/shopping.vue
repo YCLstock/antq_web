@@ -9,17 +9,20 @@
 	
 	<!-- Hero Image -->
 	  <section class="hero">
-		<img src="../assets/images/hero.jpg" alt="Fashion Hero Image">
+      <div class="info-text">
+        <!-- <h2>Our Fashion Store</h2> -->
+        <p>Discover<br> the<br> Fashion Journey</p>
+      </div>
+      <button class="buy-now-button">立即選購</button>
+		  <img src="../assets/images/hero.jpg" alt="Fashion Hero Image" >
+      <div class="overlay"></div>
 	  </section>
 
 	<!-- Company Information Section -->
-	<section class="company-info">
+	<!-- <section class="company-info">
       <img src="../assets/images/clothe.png" alt="Company">
-      <div class="info-text">
-        <!-- <h2>Our Fashion Store</h2> -->
-        <p>Discover the Fashion Journey</p>
-      </div>
-    </section>
+
+    </section> -->
   
 	  <!-- Carousel for Featured Products -->
 	  <section class="carousel">
@@ -28,8 +31,8 @@
 			<div class="slide-content">
 				<img :src="item.imgSrc" :alt="item.altText" class="slide-image">
 				<div class="slide-text">
-				<h3>{{ item.title }}</h3>
-				<p>{{ item.description }}</p>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
 				</div>
 			</div>
 			</swiper-slide>
@@ -38,17 +41,17 @@
 		</section>
 
 	<!-- Embedded Video Section -->
-    <section class="video-section">
+    <!-- <section class="video-section">
       <video width="640" height="360" autoplay muted loop >
         <source src="../assets/images/figure.mp4" type="video/mp4">
         您的瀏覽器不支持 HTML5 video 標籤。
       </video>
-    </section>
+    </section> -->
 
     <!-- Store Information -->
     <section class="store-info">
       <h2>Our Stores</h2>
-      <swiper :navigation="true" :modules="modules" class="store-box">
+      <swiper :modules="modules" class="store-box">
         <swiper-slide v-for="(store, index) in stores" :key="index" class="store-slide">
           <img :src="store.image" alt="Store Image" class="store-image">
           <div class="store-details">
@@ -168,16 +171,25 @@ import Ft from '../components/Footer.vue';
 /* 設定slide-content的樣式 */
 .slide-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center; /* 確保文字居中 */
+
+  margin: 0 auto;
+  width: fit-content;
 }
 
 /* 設定slide-image的樣式 */
 .slide-image {
-  max-width: 100%; /* 讓圖片不超過容器寬度 */
+  width: 100%; /* 讓圖片不超過容器寬度 */
   height: auto; /* 維持圖片原始比例 */
   margin-bottom: 15px; /* 圖片與文字之間的間隔 */
+}
+.slide-text{
+  margin-left: 30px;
+}
+.slide-text h3{
+  font-weight: 600;
+  font-size: 25px;
 }
 
   /* Swiper 樣式自定義 */
@@ -193,9 +205,9 @@ import Ft from '../components/Footer.vue';
   /* 更多樣式... */
 
   .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 0;
 }
 
 .navbar {
@@ -228,21 +240,75 @@ import Ft from '../components/Footer.vue';
 }
 
 .hero {
-  width: 100%;
-  margin: 20px 0;
+  width: 100vw;  /* 設定圖片寬度為視窗的100% */
+  height: 100vh;
+  object-fit: contain; /* 設定圖片以覆蓋的方式填充容器，可能會被裁切 */
+  overflow: hidden;
 }
 
 .hero img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
 }
+
+.hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;  /* 設定圖片寬度為視窗的100% */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15); /* 這裡的黑色覆蓋層是半透明的 */
+  /* z-index: 10; */
+}
+
+.info-text {
+  max-width: 60%;
+  font-weight: 700;
+  font-size: calc(10vh - 10px);
+  top: 25vh; /* 相對於容器上邊界的距離 */
+  left: 12vw; /* 相對於容器左邊界的距離 */
+  position: absolute;
+  color: white; 
+  /* text-shadow: 
+    -1px -1px 0 #c2c0c0,  
+     1px -1px 0 #c2c0c0,
+    -1px  1px 0 #c2c0c0,
+     1px  1px 0 #c2c0c0;  */
+  z-index: 1;
+}
+
+.buy-now-button {
+            background-color: #ffffff; /* 按钮背景颜色 */
+            color: rgb(15, 15, 15); /* 文字颜色 */
+            padding: 15px 32px; /* 按钮内边距 */
+            text-align: center; /* 文字居中 */
+            text-decoration: none; /* 移除下划线 */
+            display: inline-block; /* 使元素的宽高生效 */
+            font-size: calc(5vh - 10px); /* 文字大小 */
+            font-weight: 500;
+            margin: 4px 2px; /* 外边距 */
+            cursor: pointer; /* 鼠标样式 */
+            border: none; /* 移除边框 */
+            border-radius: 5px; /* 边框圆角 */
+            transition-duration: 0.4s; /* 过渡效果时间 */
+            top: 70vh; /* 相對於容器上邊界的距離 */
+            left: 12vw; /* 相對於容器左邊界的距離 */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .buy-now-button:hover {
+            background-color: #7b7d7b; /* 鼠标悬停时的背景颜色 */
+            color: white;
+        }
+
+/* 首途結束 */
 
 .carousel {
-  margin: 20px 0;
+  padding: 20px 0;
+  /* background-color: #F8F8F8; */
+  background-color: #f8f8f8;
 }
-
-
 
 .company-info {
   display: flex;
@@ -258,12 +324,7 @@ import Ft from '../components/Footer.vue';
   border-radius: 8px;
 }
 
-.info-text {
-  max-width: 60%;
-  margin-left: 20px;
-  font-weight: 900;
-  font-size: 23px;
-}
+
 
 /* 商店資訊 */
 .store-info {
@@ -281,13 +342,14 @@ import Ft from '../components/Footer.vue';
   display: flex; /* 啟用 flexbox 布局 */
   flex-direction: row; /* 預設方向為 row，但明確指定以增強可讀性 */
   align-items: center; /* 如果需要，可調整對齊方式 */
-  margin-bottom: 20px; /* 根據需要調整間距 */
+  padding-bottom: 20px; /* 根據需要調整間距 */
+  justify-content: center; /* 水平居中 */
   padding: 5px;
   width: 100%;
 }
 
 .store-image {
-  width: 50%; /* 根據需要調整圖片大小 */
+  width: 40vw; /* 根據需要調整圖片大小 */
   height: auto; /* 保持圖片的原始寬高比 */
   margin-right: 10px; /* 在圖片和文字描述之間添加一些間距 */
   object-fit: cover; /* 超出的部分會被裁切掉，保持圖片的寬高比 */
@@ -295,25 +357,26 @@ import Ft from '../components/Footer.vue';
 }
 
 .store-details {
-  flex: 1; /* 讓文字描述部分占據剩餘的空間 */
+  width: 30vw;
   padding: 10px; /* 添加一些內邊距 */
 }
 
 /* 針對 swiper-slide 元素也設定 flex 布局，以確保內容正確排列 */
 .store-slide {
+  justify-content: center; /* 水平居中 */
   display: flex;
   flex-direction: row; /* 確保內容是水平排列的 */
-  height: 160px;
+  height: 35vh;
 }
 
 .store-details h3 {
-  font-size: 1.1em; /* 或根據你的需求設定具體的大小 */
+  font-size: 1.4em; /* 或根據你的需求設定具體的大小 */
   margin-bottom: 3px;
   font-weight: 600;
 }
 
 .store-details p {
-  font-size: 0.8em; /* 縮小段落文字大小，根據需要調整 */
+  font-size: 1.1em; /* 縮小段落文字大小，根據需要調整 */
   margin-top: 2px; /* 根據需要調整間距 */
   margin-bottom: 2px; /* 根據需要調整間距 */
 }

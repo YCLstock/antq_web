@@ -118,6 +118,6 @@ export default {
     color: rgb(254, 246, 246);
 }
 .white_zone{
-  height: 75px;
+  height: 0px;
 }
 </style>
